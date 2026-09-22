@@ -14,6 +14,7 @@ int main() {
     std::vector<uint64_t> vector;
     std::vector<uint64_t> vector_reserved;
     std::mt19937_64 rng(0);
+    uint64_t summed_value = 0;
     uint64_t next;
 
     rng.seed(0);
@@ -41,5 +42,24 @@ int main() {
     }
     std::cout << "Reserved Vector: " << timer.glance<Timer::microseconds>() << std::endl;
 
+    timer.restart();
+    for (auto items : list) {
+        summed_value += items;
+    }
+    std::cout << "Summed Value List: " << summed_value << " In " << timer.glance<Timer::microseconds>() << " Microseconds" << std::endl;
+
+    summed_value = 0;
+    timer.restart();
+    for (auto items : vector) {
+        summed_value += items;
+    }
+    std::cout << "Summed Value Vector: " << summed_value << " In " << timer.glance<Timer::microseconds>() << " Microseconds" << std::endl;
+
+    summed_value = 0;
+    timer.restart();
+    for (auto items : vector_reserved) {
+        summed_value += items;
+    }
+    std::cout << "Summed Value Reserved Vector: " << summed_value << " In " << timer.glance<Timer::microseconds>() << " Microseconds" << std::endl;
     return 0;
 }
